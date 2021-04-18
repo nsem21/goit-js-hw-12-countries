@@ -34,10 +34,10 @@ function cleanSearchResults() {
     }
 }
 
-function notification() {
+function notification(textErr) {
     error({
         type: 'error',
-        text: "Too many matches found. Please specify your query.",
+        text: textErr,
         hide: true,
         delay: '1000',
         closer: false,
@@ -48,14 +48,16 @@ function notification() {
 function searchChecking(inputQuery) {
     API.fetchCountries(inputQuery).then(result => {
         if (result.length > 10) {
-            notification();
+            notification("Too many matches found. Please specify your query.");
         } else if (result.length === 1) {
+
             updateResult(templateCard, result[0]);
         } else {
+
             updateResult(templateItem, result);
         }
     }).catch(error => {
-        console.log(error);
+        notification("Error in country name!");;
     });
 }
 
