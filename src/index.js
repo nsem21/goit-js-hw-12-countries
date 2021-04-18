@@ -51,7 +51,7 @@ function searchChecking(inputQuery) {
             notification("Too many matches found. Please specify your query.");
         } else if (result.length === 1) {
 
-            updateResult(templateCard, result[0]);
+            updateResult(templateCard, ...result);
         } else {
 
             updateResult(templateItem, result);
